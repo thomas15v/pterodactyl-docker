@@ -1,0 +1,37 @@
+version: '2'
+services:
+  db:
+    image: mariadb:10
+    expose:
+    - "3306"
+    restart: always
+    environment:
+    - "MYSQL_ROOT_PASSWORD=apassword"
+    - "MYSQL_DATABASE=pterodb"
+    - "MYSQL_USER=ptero"
+    - "MYSQL_PASSWORD=pterodbpass"
+  panel:
+    build: .
+    tty: true
+    links:
+    - db
+    ports:
+    - 80:80
+    environment:
+    - "db_host=db"
+    - "db_port=3306"
+    - "db_name=pterodb"
+    - "db_user=ptero"
+    - "db_pass=pterodbpass"
+    - "panel_url=panel.densitycraft.com"
+    - "timezone=America/New_York"
+    - "email_driver=mail"
+    - "panel_email=panel@densitycraft.com"
+    - "email_user="
+    - "email_pass="
+    - "email_domain="
+    - "email_port="
+    - "admin_email=admin@densitycraft.com"
+    - "admin_pass=zc4kRRnEwnux"
+    - "admin_stat=1"
+    - "VIRTUAL_HOST=panel.densitycraft.com"
