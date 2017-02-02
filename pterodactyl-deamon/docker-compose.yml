@@ -1,0 +1,11 @@
+version: '2'
+services:
+  daemon:
+    build: .
+    ports:
+      - "8080:8080"
+    tty: true
+    restart: always
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - ".:/srv/daemon/config/"
